@@ -17,9 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from octofit_tracker import views
-import os
 
-CODESPACE_NAME = os.environ.get('CODESPACE_NAME', 'localhost')
 router = routers.DefaultRouter()
 router.register(r'teams', views.TeamViewSet)
 router.register(r'users', views.OctoFitUserViewSet)
