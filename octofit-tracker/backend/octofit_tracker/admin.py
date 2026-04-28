@@ -34,17 +34,3 @@ class LeaderboardAdmin(admin.ModelAdmin):
     list_display = ['user', 'team', 'total_calories_burned', 'total_activities', 'rank']
     search_fields = ['user__name']
     list_filter = ['team']
-
-
-@admin.register(Workout)
-class WorkoutAdmin(admin.ModelAdmin):
-    list_display = ['name', 'difficulty', 'duration_minutes', 'created_at']
-    list_filter = ['difficulty']
-    search_fields = ['name']
-
-
-@admin.register(Leaderboard)
-class LeaderboardAdmin(admin.ModelAdmin):
-    list_display = ['user', 'team', 'rank', 'total_calories_burned', 'total_activities']
-    list_filter = ['team', 'rank']
-    search_fields = ['user__name']

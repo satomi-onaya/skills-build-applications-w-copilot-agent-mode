@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-i@&n9)x8hf(a0dd1=d6$kjo^8!wmqi)k32km1m)4p^ye*i2$i4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+import os
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME', 'localhost')
+ALLOWED_HOSTS = ['*', f'{CODESPACE_NAME}-8000.app.github.dev']
 
 
 # Application definition
@@ -39,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'djongo',
     'octofit_tracker',
 ]
 
@@ -80,12 +81,8 @@ WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'octofit_db',
-        'CLIENT': {
-            'host': 'localhost',
-            'port': 27017,
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -93,7 +90,8 @@ DATABASES = {
 # REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'BASE_URL': f'https://{CODESPACE_NAME}-8000.app.github.dev/'
 }
 
 # CORS Configuration
